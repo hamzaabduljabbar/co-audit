@@ -9,10 +9,10 @@
 #
 #   usage:  bash work/run_co_tests.sh        (run from the project root)
 
-cd "$(dirname "$0")/.." || exit 1
+cd "$(dirname "$0")" || exit 1
 export PYTHONIOENCODING=utf-8
 D="$HOME/Downloads/co_audit_docs"
-FX="work/co_fixtures"
+FX="co_fixtures"
 P=0; F=0
 
 chk() {  # chk <name> <output> <expected-regex>
@@ -26,7 +26,7 @@ chk() {  # chk <name> <output> <expected-regex>
 echo "=== co_audit: synthetic fixtures (stacking + unit price) ==="
 # A CO that stacks a 15% sub markup and a 15% GC markup on top, and inflates
 # two unit prices above the contract rate schedule.
-O=$(py work/co_audit.py "$FX/synthetic_co.txt" "$FX/rate_schedule.txt" 2>&1)
+O=$(py co_audit.py "$FX/synthetic_co.txt" "$FX/rate_schedule.txt" 2>&1)
 chk "stacking: 32.25% effective"      "$O" "32\.25% of .* base"
 chk "stacking: over combined cap"     "$O" "OVER the 15% combined cap"
 chk "stacking: counts 2 tiers"        "$O" "across 2 tiers"
@@ -39,7 +39,7 @@ chk "rung cap from form"              "$O" "at the cap 15% \(stated on the CO fo
 
 echo "=== co_audit: real Redwood City CO #1 (clean) ==="
 if [ -f "$D/rwc_changeorder1.pdf" ]; then
-  O=$(py work/co_audit.py "$D/rwc_changeorder1.pdf" 2>&1)
+  O=$(py co_audit.py "$D/rwc_changeorder1.pdf" 2>&1)
   chk "reads its own printed caps"    "$O" "self 15%  sub-own-O&P 10%  GC-on-sub 5%"
   chk "blank sub markup = not charged" "$O" "left blank - not charged"
   chk "GC-on-sub 5% at cap"           "$O" "5\.00% of Item f, at the cap 5%"
@@ -51,7 +51,7 @@ fi
 
 echo "=== co_audit: real 85-page package (two real overcharges) ==="
 if [ -f "$D/rwc_changeorder4.pdf" ]; then
-  O=$(py work/co_audit.py "$D/rwc_changeorder4.pdf" 2>&1)
+  O=$(py co_audit.py "$D/rwc_changeorder4.pdf" 2>&1)
   chk "catches 15.47% O&P overcharge" "$O" "15\.47%.*OVERCHARGE \\\$85\.46"
   chk "catches bond 1.75% overcharge" "$O" "1\.75%.*OVERCHARGE \\\$76\.19"
   chk "no phantom stacking violation" "$(echo "$O" | grep -c '1399')" "^0$"
@@ -64,7 +64,7 @@ fi
 echo "=== co_audit: checks 3 & 4 (labor + material) ==="
 # labor rate inflation, a padded extension (hours x rate != line total), and a
 # material quantity that exceeds the takeoff - each a defensible dollar figure.
-O=$(py work/co_audit.py "$FX/synthetic_co2.txt" "$FX/rate_schedule2.txt" \
+O=$(py co_audit.py "$FX/synthetic_co2.txt" "$FX/rate_schedule2.txt" \
       "$FX/takeoff.txt" 2>&1)
 chk "labor rate inflation caught"     "$O" "electrician.*billed \\\$95\.00/hr vs contract labor rate \\\$85\.00.*OVERCHARGE \\\$100\.00"
 chk "padded extension caught"         "$O" "Laborer.*20 hr x \\\$48\.00 = \\\$960\.00.*extends to \\\$1,100\.00.*discrepancy \\\$140\.00"
@@ -83,7 +83,7 @@ echo "=== co_audit: checks 3 & 4 on a REAL native-text CO (Otsego MN) ==="
 # tool must recompute from qty x rate and flag NOTHING here.
 OT="$HOME/Downloads/co_audit_docs/otsego_co.pdf"
 if [ -f "$OT" ]; then
-  O=$(py work/co_audit.py "$OT" 2>&1)
+  O=$(py co_audit.py "$OT" 2>&1)
   chk "real labor lines parsed"       "$O" "7 labor line\(s\)"
   chk "real material lines parsed"    "$O" "12 material line\(s\)"
   chk "leading-decimal qty (.125)"    "$O" "0\.125 GAL @ \\\$87\.66 = \\\$10\.96"
@@ -105,7 +105,7 @@ echo "=== co_audit: check 2 catches real unit-price inflation (Baxter CO#3) ==="
 # line reflows its unit onto a neighbouring line (unit-less numbered fallback +
 # containment matching 'CLASS 5' <-> 'CL 5'). Lump-sum items must stay silent.
 if [ -f "$D/baxter_co3.pdf" ] && [ -f "$D/baxter_contract_rates.txt" ]; then
-  O=$(py work/co_audit.py "$D/baxter_co3.pdf" "$D/baxter_contract_rates.txt" 2>&1)
+  O=$(py co_audit.py "$D/baxter_co3.pdf" "$D/baxter_contract_rates.txt" 2>&1)
   chk "real unit-price overcharge"    "$O" "AGGREGATE BASE CLASS 5.*billed \\\$45\.00/CY vs contract rate \\\$35\.00.*x 90 = OVERCHARGE \\\$900\.00"
   chk "reflowed unit-less pay item"   "$O" "AGGREGATE BASE CLASS 5.*match 75%"
   chk "lump-sum items stay silent"    "$(echo "$O" | sed -n '/CHECK 2/,/CHECK 3/p' | grep -ciE 'mobilization|grading|sump|heater')" "^0$"
@@ -123,7 +123,7 @@ echo "=== co_audit: check 3 catches real labor-rate inflation (RWC CO#4) ==="
 # package) is $134.12/hr. The overcharge is real and must be recomputed from
 # rate x hours, never from the offset printed column.
 if [ -f "$D/rwc_changeorder4.pdf" ] && [ -f "$D/rwc_contract_rates.txt" ]; then
-  O=$(py work/co_audit.py "$D/rwc_changeorder4.pdf" "$D/rwc_contract_rates.txt" 2>&1)
+  O=$(py co_audit.py "$D/rwc_changeorder4.pdf" "$D/rwc_contract_rates.txt" 2>&1)
   chk "T&M labor lines parsed"        "$O" "2 labor line\(s\)"
   chk "contract labor rates loaded"   "$O" "4 contract labor rate\(s\) available"
   chk "rate match by containment"     "$O" "JOURNEYMAN.*match 100%"
@@ -141,7 +141,7 @@ echo "=== co_audit: check 4 drives the real drawing-takeoff engine ==="
 # not a human eyeballing a rendered page.
 TKDB="$HOME/Downloads/drawing-takeoff/demo.db"
 if [ -f "$TKDB" ]; then
-  O=$(py work/co_audit.py "$FX/co_doors.txt" "" "$TKDB" 2>&1)
+  O=$(py co_audit.py "$FX/co_doors.txt" "" "$TKDB" 2>&1)
   chk "queries real takeoff DB"       "$O" "checked against the takeoff DB"
   chk "door count over takeoff"       "$O" "160 EA but the high-confidence takeoff shows 147 'door'.*OVERCHARGE \\\$5,460\.00"
   chk "carries medium confidence"     "$O" "medium-confidence takeoff shows 9 'column'.*OVERCHARGE \\\$5,550\.00"
@@ -156,7 +156,7 @@ echo "=== co_audit: contract overrides the form's own printed cap ==="
 # the 00410 exhibit (10% self cap), the RWC form's compliant-looking 15% O&P
 # lines must flip to violations, and the dollar delta must grow accordingly.
 if [ -f "$D/rwc_changeorder4.pdf" ] && [ -f "$D/00410_pricing_change_orders.pdf" ]; then
-  O=$(py work/co_audit.py "$D/rwc_changeorder4.pdf" \
+  O=$(py co_audit.py "$D/rwc_changeorder4.pdf" \
         "$D/00410_pricing_change_orders.pdf" 2>&1)
   chk "contract conflict detected"    "$O" "CONTRACT CONFLICT.*15% self cap.*only 10%"
   chk "audit switches to 10% cap"     "$O" "self 10%"
@@ -176,7 +176,7 @@ echo "=== co_audit: scanned page read by Claude is merged + flagged ==="
 # but every finding from a scan-read page is marked [SCAN] and must be verified,
 # never sold with text-layer certainty. Page 2 here is blank in the .txt and its
 # labor tag comes only from the sidecar transcription.
-O=$(py work/co_audit.py "$FX/scan_co.txt" "$FX/scan_rates.txt" 2>&1)
+O=$(py co_audit.py "$FX/scan_co.txt" "$FX/scan_rates.txt" 2>&1)
 chk "scan page noted at top"        "$O" "page\(s\) 2 had no text layer and were read from the rendered image"
 chk "check runs on merged text"     "$O" "p2: 'JOURNEYMAN': billed \\\$152\.35/hr vs contract labor rate \\\$134\.12/hr"
 chk "finding flagged [SCAN] w/ page" "$O" "OVERCHARGE \\\$127\.61.*\[SCAN - verify against source page 2\]"
@@ -184,9 +184,9 @@ chk "summary scan caveat"           "$O" "read from a scanned image by Claude"
 chk "text-layer page not flagged"   "$(echo "$O" | grep -c 'p1:.*\[SCAN')" "^0$"
 
 echo "=== co_audit: guards ==="
-chk "usage guard"                    "$(py work/co_audit.py 2>&1)" "usage:"
-chk "missing CO handled"             "$(py work/co_audit.py $FX/nope.txt 2>&1)" "not found|unreadable"
-chk "no rate schedule -> skip check2" "$(py work/co_audit.py $FX/synthetic_co.txt 2>&1)" "no contract / rate schedule supplied"
+chk "usage guard"                    "$(py co_audit.py 2>&1)" "usage:"
+chk "missing CO handled"             "$(py co_audit.py $FX/nope.txt 2>&1)" "not found|unreadable"
+chk "no rate schedule -> skip check2" "$(py co_audit.py $FX/synthetic_co.txt 2>&1)" "no contract / rate schedule supplied"
 
 echo
 echo "  ================  $P passed, $F failed  ================"
