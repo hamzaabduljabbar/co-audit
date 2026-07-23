@@ -1,0 +1,28 @@
+EXAMPLE OUTPUT - drawing-takeoff run on a real 89-page architectural set
+(room names removed for confidentiality; sizes/materials are the real extracted values)
+==========================================================================
+
+$ py scripts/takeoff.py query count --db set.db
+type          total   high medium
+grid            318      0    318
+door            147    147      0
+panel            47     47      0
+mixed_schedule     12     12      0
+column            9      0      9
+
+$ py scripts/takeoff.py query list --type door --db set.db
+  door 103A: 3'-0" x 7'-10 1/2", hollow metal. source: sheet A601.
+  door 110: 3'-0" x 7'-10 1/2", hollow metal, 45 MIN. fire. source: sheet A601.
+  door 115: 3'-0" x 7'-10 1/2", hollow metal. source: sheet A601.
+  door 120: 3'-0" x 7'-10 1/2", hollow metal. source: sheet A601.
+  door 130: 3'-0" x 7'-10 1/2", wood. source: sheet A601.
+  door 130A.1: 3'-0" x 7'-10 1/2", hollow metal. source: sheet A601.
+  door 130A.2: 3'-0" x 7'-10 1/2", hollow metal. source: sheet A601.
+  door 160.1: 3'-0" x 7'-10 1/2", wood. source: sheet A601.
+  ... (147 doors total, all high confidence, read from the door schedule)
+
+$ py scripts/takeoff.py query flags --db set.db
+  No measurement flags. (Nothing exceeds building envelope ~76.8 m.)
+
+Every count is read from the PDF vector text layer (schedule rows), not
+guessed from pixels. Full detail (incl. room names) stays in your local DB.

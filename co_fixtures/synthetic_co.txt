@@ -1,0 +1,19 @@
+CHANGE ORDER PROPOSAL  COR-014  Additional Foundation Work
+Reinforced concrete footing         12 CY   $  225.00
+#5 reinforcing bar                  850 LF   $    2.10
+Excavation, structural              40 CY   $   38.00
+
+WORK PERFORMED BY SUBCONTRACTOR                              ADD
+(a) Material                                          $  4,800.00
+(b) Labor                                             $  3,600.00
+(c) Equipment                                         $  1,200.00
+(d) Subtotal                                          $  9,600.00
+(e) Add Overhead and Profit for Subcontractor, not to
+    exceed fifteen percent (15%) of Item (d)          $  1,440.00
+(f) Subtotal                                          $ 11,040.00
+(g) Add Overhead and Profit for Contractor, not to
+    exceed fifteen percent (15%) of Item (f)          $  1,656.00
+(h) Subtotal                                          $ 12,696.00
+(i) Add Bond and Insurance, not to exceed one and a
+    half percent (1.5%) of Item (h)                   $    190.44
+(j) TOTAL                                             $ 12,886.44

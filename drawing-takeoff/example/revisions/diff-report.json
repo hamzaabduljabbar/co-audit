@@ -1,0 +1,87 @@
+{
+  "objects_added": [
+    {
+      "mark": "D-03",
+      "type": "opening",
+      "sheet": "S-03",
+      "attrs": {
+        "SIZE": "1.2x2.1",
+        "TYPE": "STEEL",
+        "REMARKS": "FIRE RATED 60MIN"
+      },
+      "confidence": "high"
+    },
+    {
+      "mark": "F15",
+      "type": "footing",
+      "sheet": "S-02",
+      "attrs": {
+        "SIZE": "1200x1200",
+        "DEPTH": "700",
+        "REINFORCEMENT": "12-T25 E/W",
+        "CONCRETE": "40 MPa"
+      },
+      "confidence": "high"
+    }
+  ],
+  "objects_removed": [
+    {
+      "mark": "F09",
+      "type": "footing",
+      "sheet": "S-02",
+      "attrs": {
+        "SIZE": "450x450",
+        "DEPTH": "400",
+        "REINFORCEMENT": "6-T12 E/W",
+        "CONCRETE": "25 MPa"
+      },
+      "confidence": "high"
+    }
+  ],
+  "objects_modified": [
+    {
+      "mark": "F10",
+      "type": "footing",
+      "sheet": "S-02",
+      "changes": {
+        "SIZE": {
+          "from": "600x600",
+          "to": "750x750"
+        }
+      },
+      "confidence": "high"
+    },
+    {
+      "mark": "F12",
+      "type": "footing",
+      "sheet": "S-02",
+      "changes": {
+        "DEPTH": {
+          "from": "500",
+          "to": "600"
+        }
+      },
+      "confidence": "high"
+    }
+  ],
+  "dims_changed": [
+    {
+      "sheet": "S-01",
+      "added": [
+        "26'-0\""
+      ],
+      "removed": [
+        "24'-0\""
+      ],
+      "confidence": "high"
+    }
+  ],
+  "notes_changed": [
+    {
+      "note": "4",
+      "from": "FOUNDATIONS DESIGNED FOR BEARING CAPACITY 150 kPa.",
+      "to": "FOUNDATIONS DESIGNED FOR BEARING CAPACITY 200 kPa.",
+      "confidence": "high"
+    }
+  ]
+}

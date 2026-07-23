@@ -1,0 +1,6 @@
+CONTRACT RATE SCHEDULE
+Journeyman carpenter           1 HR   $  62.00
+Journeyman electrician         1 HR   $  85.00
+Laborer                        1 HR   $  48.00
+Ready-mix concrete 4000psi     1 CY   $ 190.00
+Wire mesh 6x6 W2.9             1 SF   $   0.85

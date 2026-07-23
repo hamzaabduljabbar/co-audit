@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520">
+  <defs>
+    <style>
+      .bg { fill: #1e1e2e; }
+      .titlebar { fill: #313244; }
+      .red { fill: #f38ba8; }
+      .yellow { fill: #f9e2af; }
+      .green { fill: #a6e3a1; }
+      .t { fill: #cdd6f4; font-family: 'Cascadia Code','Consolas',monospace; font-size: 12.5px; }
+      .prompt { fill: #89b4fa; }
+      .dim { fill: #6c7086; }
+      .add { fill: #a6e3a1; }
+      .rem { fill: #f38ba8; }
+      .mod { fill: #f9e2af; }
+      .hdr { fill: #cba6f7; font-weight: bold; }
+    </style>
+  </defs>
+  <rect class="bg" width="760" height="520" rx="10"/>
+  <rect class="titlebar" width="760" height="34" rx="10"/>
+  <rect class="bg" x="0" y="24" width="760" height="10"/>
+  <circle class="red" cx="20" cy="17" r="6"/>
+  <circle class="yellow" cx="40" cy="17" r="6"/>
+  <circle class="green" cx="60" cy="17" r="6"/>
+  <text class="dim" x="330" y="21" text-anchor="middle">drawdiff</text>
+
+  <text class="prompt" x="18" y="60">$</text>
+  <text class="t" x="32" y="60">py scripts/drawdiff.py SET_revC.pdf SET_revD.pdf</text>
+
+  <text class="t" x="18" y="86">REVISION DIFF   revC.pdf  -&gt;  revD.pdf</text>
+  <text class="dim" x="18" y="104">7 changes detected. Every change read from the text layer (high).</text>
+
+  <text class="hdr" x="18" y="134">OBJECTS ADDED</text>
+  <text class="add" x="18" y="154">  + D-03   opening  [S-03]  Fire rated 60min steel door</text>
+  <text class="add" x="18" y="172">  + F15    footing  [S-02]  1200x1200, 700 deep, 40 MPa</text>
+
+  <text class="hdr" x="18" y="202">OBJECTS REMOVED</text>
+  <text class="rem" x="18" y="222">  - F09    footing  [S-02]  450x450, 400 deep, 25 MPa</text>
+
+  <text class="hdr" x="18" y="252">OBJECTS MODIFIED</text>
+  <text class="mod" x="18" y="272">  ~ F10    footing  [S-02]</text>
+  <text class="t"   x="18" y="290">        SIZE:  600x600  -&gt;  750x750</text>
+  <text class="mod" x="18" y="308">  ~ F12    footing  [S-02]</text>
+  <text class="t"   x="18" y="326">        DEPTH: 500  -&gt;  600</text>
+
+  <text class="hdr" x="18" y="356">DIMENSIONS CHANGED</text>
+  <text class="rem" x="18" y="376">  - [S-01] 24'-0"</text>
+  <text class="add" x="18" y="394">  + [S-01] 26'-0"</text>
+
+  <text class="hdr" x="18" y="424">GENERAL NOTES CHANGED</text>
+  <text class="mod" x="18" y="444">  ~ note 4</text>
+  <text class="t"   x="18" y="462">        was: bearing capacity 150 kPa</text>
+  <text class="t"   x="18" y="480">        now: bearing capacity 200 kPa</text>
+
+  <text class="dim" x="18" y="506">Not pixels moved - objects, dimensions and notes changed, in words.</text>
+</svg>

@@ -1,0 +1,5 @@
+CONTRACT UNIT PRICE SCHEDULE - Foundation Division
+Reinforced concrete footing          1 CY    $ 185.00
+#5 reinforcing bar                   1 LF    $   1.85
+Excavation, structural               1 CY    $  38.00
+Formwork, footing                    1 SF    $   9.25

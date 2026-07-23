@@ -1,0 +1,3 @@
+# Drawing Takeoff — dependencies
+# The only hard requirement: PyMuPDF reads the PDF vector text layer.
+PyMuPDF>=1.23.0

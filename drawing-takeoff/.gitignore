@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Generated databases and indexes (built from the user's own PDFs)
+*.db
+*.db-shm
+*.db-wal
+/drawing.md
+
+# Drawings and scratch
+*.pdf
+!example/**
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

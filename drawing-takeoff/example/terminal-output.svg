@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="520" viewBox="0 0 720 520">
+  <defs>
+    <style>
+      .bg { fill: #1e1e2e; }
+      .titlebar { fill: #313244; }
+      .red { fill: #f38ba8; }
+      .yellow { fill: #f9e2af; }
+      .green { fill: #a6e3a1; }
+      .text { fill: #cdd6f4; font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace; font-size: 13px; }
+      .prompt { fill: #89b4fa; }
+      .dim { fill: #6c7086; }
+      .highlight { fill: #a6e3a1; }
+      .warn { fill: #f9e2af; }
+      .header { fill: #cba6f7; }
+    </style>
+  </defs>
+  <!-- Window frame -->
+  <rect class="bg" width="720" height="520" rx="10"/>
+  <rect class="titlebar" width="720" height="36" rx="10"/>
+  <rect class="bg" x="0" y="26" width="720" height="10"/>
+  <!-- Traffic lights -->
+  <circle class="red" cx="20" cy="18" r="6"/>
+  <circle class="yellow" cx="40" cy="18" r="6"/>
+  <circle class="green" cx="60" cy="18" r="6"/>
+  <text class="dim" x="310" y="22" text-anchor="middle">drawing-takeoff</text>
+
+  <!-- Command 1: query count -->
+  <text class="prompt" x="20" y="64">$</text>
+  <text class="text" x="34" y="64">py scripts/takeoff.py query count --db set.db</text>
+
+  <text class="header" x="20" y="92">type          total   high   medium</text>
+  <text class="text" x="20" y="112">grid            318      0      318</text>
+  <text class="text" x="20" y="132">door            147    147        0</text>
+  <text class="text" x="20" y="152">panel            47     47        0</text>
+  <text class="text" x="20" y="172">column            9      0        9</text>
+
+  <!-- Command 2: query list footing -->
+  <text class="prompt" x="20" y="212">$</text>
+  <text class="text" x="34" y="212">py scripts/takeoff.py query list --type footing --db struct.db</text>
+
+  <text class="highlight" x="20" y="240">F10</text>
+  <text class="dim" x="52" y="240">[S-03]</text>
+  <text class="warn" x="104" y="240">high</text>
+  <text class="text" x="146" y="240">Size=600x600; Depth=500;</text>
+  <text class="text" x="20" y="260">Reinforcement=8-T16 E/W, reinforced; Concrete=32 MPa</text>
+
+  <!-- Command 3: sanity check -->
+  <text class="prompt" x="20" y="300">$</text>
+  <text class="text" x="34" y="300">py scripts/takeoff.py query flags --db set.db</text>
+
+  <text class="warn" x="20" y="328">[WARN]</text>
+  <text class="text" x="72" y="328">M201 scaled = 500.00m  ->  500.0m > 1.5x building</text>
+  <text class="text" x="20" y="348">envelope 76.8m</text>
+
+  <!-- Command 4: build -->
+  <text class="prompt" x="20" y="388">$</text>
+  <text class="text" x="34" y="388">py scripts/takeoff.py build SET.pdf --db set.db</text>
+
+  <text class="dim" x="20" y="416">Indexing 89 pages...</text>
+  <text class="text" x="20" y="436">Stored</text>
+  <text class="highlight" x="68" y="436">91,078</text>
+  <text class="text" x="120" y="436">words across</text>
+  <text class="highlight" x="218" y="436">89</text>
+  <text class="text" x="238" y="436">sheets</text>
+  <text class="text" x="20" y="456">Extracted</text>
+  <text class="highlight" x="96" y="456">2,346</text>
+  <text class="text" x="140" y="456">dimensions,</text>
+  <text class="highlight" x="242" y="456">521</text>
+  <text class="text" x="266" y="456">tag callouts</text>
+  <text class="text" x="20" y="476">Wrote drawing.md</text>
+
+  <text class="dim" x="20" y="504">Index once. Query forever.</text>
+</svg>
