@@ -134,6 +134,8 @@ Check 4 shells out to the bundled [`drawing-takeoff/`](drawing-takeoff/) engine 
 
 The schedules pass is slow (~30s per large sheet, so ~10 min on an 89-sheet set) but the resulting `.db` is cached under `outputs/` and reused instantly on future audits. Pre-build once, audit many times.
 
+> **Heads up — first drawing build takes minutes, not seconds.** On a large set (~89 sheets) expect ~10 minutes for the first audit that includes a drawing. Claude will look "stuck" during that time — it isn't; the schedules pass is churning through table detection. The `.db` gets cached under `outputs/` and every subsequent audit of the same building is instant.
+
 `co_audit.py` finds the engine automatically — the bundled path is the first entry in `TAKEOFF_ROOTS`.
 
 ---
